@@ -363,5 +363,12 @@
     // 4. Return undefined.
   });
 
-  CreateMethodProperty(self, "Symbol", Symbol);
+  // Export the object
+  try {
+    CreateMethodProperty(self, "Symbol", Symbol);
+  } catch (e) {
+    // IE8 throws an error here if we set enumerable to false.
+    // More info on table 2: https://msdn.microsoft.com/en-us/library/dd229916(v=vs.85).aspx
+    self["Symbol"] = Symbol;
+  }
 }());
