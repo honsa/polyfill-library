@@ -1,22 +1,21 @@
 aliases = [ ]
-dependencies = [ "Symbol", "Object.defineProperty" ]
+dependencies = [
+    "Symbol",
+    "Object.defineProperty",
+    "String.prototype.trim"
+]
 license = "MIT"
 spec = "https://tc39.github.io/proposal-Symbol-description/"
 docs = "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/description"
 
 [browsers]
-edge = "*"
-edge_mob = "*"
-ie = "*"
-ie_mob = "*"
-safari = "*"
-chrome = "< 70"
-firefox = "< 63"
-firefox_mob = "< 63"
-ios_saf = "*"
-opera = "< 57"
-op_mini = "*"
-samsung_mob = "*"
-android = "*"
-bb = "*"
-
+edge = "13 - *"
+edge_mob = "13 - *"
+safari = "9 - *"
+chrome = "50 - 69"
+firefox = "40 - 62"
+firefox_mob = "40 - 62"
+ios_saf = "9 - *"
+opera = "37 - 56"
+samsung_mob = "5 - *"
+android = "5.1 - "
