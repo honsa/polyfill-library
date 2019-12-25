@@ -299,10 +299,24 @@
   var nativeToString = Object.prototype.toString;
   // Polyfill.io - Patching Object.prototype.toString to work correctly for Symbol objects.
   // TODO: Make a full Object.prototype.toString polyfill which works with Symbol.toStringTag
+  var strictModeSupported = (function(){ 'use strict'; return this; }).call(null) === null;
   CreateMethodProperty(Object.prototype, "toString", function() {
     if (Type(this) === "symbol") {
       return "[object Symbol]";
-    }
+	}
+	if (!strictModeSupported) {
+		// https://github.com/Financial-Times/polyfill-library/issues/164#issuecomment-486965300
+		// Polyfill.io this code is here for the situation where a browser does not
+		// support strict mode and is executing `Object.prototype.toString.call(null)`.
+		// This code ensures that we return the correct result in that situation however,
+		// this code also introduces a bug where it will return the incorrect result for
+		// `Object.prototype.toString.call(window)`. We can't have the correct result for
+		// both `window` and `null`, so we have opted for `null` as we believe this is the more 
+		// common situation. 
+		if (this === self) {
+			return '[object Null]';
+		}
+	}
     return nativeToString.call(this);
   });
 
